@@ -18,7 +18,31 @@ Then, add it your application component:
 ```rust
 #[function_component(Application)]
 fn application() -> Html {
-    html!()
+    let ask = use_callback(|context, ()| html!(<AskConsent {context} />), ());
+
+    html!(
+        <Consent<()> {ask}>
+            <State/>
+        </Consent<()>>
+    )
+}
+```
+
+And then, you can check consent later:
+
+```rust
+#[function_component(State)]
+fn state() -> Html {
+    let consent = use_consent::<()>();
+
+    html!(
+        <>
+            <dl>
+                <dt>{"Consent state"}</dt>
+                <dd>{ format!("{consent:#?}")}</dd>
+            </dl>
+        </>
+    )
 }
 ```
 

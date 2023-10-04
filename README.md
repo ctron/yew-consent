@@ -18,7 +18,7 @@ Then, add it your application component:
 ```rust
 #[function_component(Application)]
 fn application() -> Html {
-    let ask = use_callback(|context, ()| html!(<AskConsent {context} />), ());
+    let ask = use_callback((), |context, ()| html!(<AskConsent {context} />));
 
     html!(
         <Consent<()> {ask}>

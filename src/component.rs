@@ -60,11 +60,11 @@ where
     let consent = use_state_eq(|| load_state(&props.consent_key));
 
     let callback = use_callback(
+        (props.consent_key.clone(), consent.clone()),
         |state: Option<ConsentState<T>>, (consent_key, consent)| {
             store_state(consent_key, state.clone());
             consent.set(state);
         },
-        (props.consent_key.clone(), consent.clone()),
     );
     let context = ConsentContext { callback };
 

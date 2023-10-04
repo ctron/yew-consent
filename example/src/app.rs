@@ -4,7 +4,7 @@ use yew_consent::prelude::*;
 
 #[function_component(Application)]
 pub fn application() -> Html {
-    let ask = use_callback(|context, ()| html!(<AskConsent {context} />), ());
+    let ask = use_callback((), |context, ()| html!(<AskConsent {context} />));
 
     html!(
         <Consent<()> {ask}>
@@ -18,14 +18,11 @@ fn state() -> Html {
     let consent = use_consent::<()>();
     let consent_context = use_consent_context::<()>();
 
-    let onclear = use_callback(
-        |_, context| {
-            if let Some(context) = &context {
-                context.set(None);
-            }
-        },
-        consent_context,
-    );
+    let onclear = use_callback(consent_context, |_, context| {
+        if let Some(context) = &context {
+            context.set(None);
+        }
+    });
 
     html!(
         <>

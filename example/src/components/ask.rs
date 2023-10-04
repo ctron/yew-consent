@@ -8,14 +8,12 @@ pub struct AskConsentProperties {
 
 #[function_component(AskConsent)]
 pub fn ask_consent(props: &AskConsentProperties) -> Html {
-    let onyes = use_callback(
-        |_, consent| consent.set(ConsentState::Yes(())),
-        props.context.clone(),
-    );
-    let onno = use_callback(
-        |_, consent| consent.set(ConsentState::No),
-        props.context.clone(),
-    );
+    let onyes = use_callback(props.context.clone(), |_, consent| {
+        consent.set(ConsentState::Yes(()))
+    });
+    let onno = use_callback(props.context.clone(), |_, consent| {
+        consent.set(ConsentState::No)
+    });
 
     html!(
         <>

@@ -1,6 +1,6 @@
 [package]
 name = "yew-consent"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2021"
 
 authors = ["Jens Reimann <jreimann@redhat.com>"]
@@ -15,7 +15,7 @@ readme = "README.md"
 gloo-storage = "0.3"
 serde = "1"
 serde_json = "1"
-yew = "0.20"
+yew = "0.21"
 
 [dependencies.web-sys]
 version = "0.3"

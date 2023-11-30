@@ -47,7 +47,7 @@ where
     pub consent_key: AttrValue,
 
     #[prop_or_default]
-    pub children: Children,
+    pub children: Html,
 
     pub ask: Callback<ConsentContext<T>, Html>,
 }
@@ -73,14 +73,13 @@ where
             {
                 match &*consent {
                     Some(state) => {
-                        let children: Html = props.children.iter().collect();
                         match &state {
                             ConsentState::Yes(_) => html!(
                                 <ContextProvider<ConsentState<T>> context={state.clone()}>
-                                    {children}
+                                    { props.children.clone() }
                                 </ContextProvider<ConsentState<T>>>
                             ),
-                            ConsentState::No => children,
+                            ConsentState::No => props.children.clone(),
                         }
                     }
                     None => props.ask.emit(context)
